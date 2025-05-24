@@ -16,4 +16,8 @@ export class DeviceService {
   listDevices() {
     return this.http.get<Device[]>(this.URL_PATH);
   }
+
+  removeDevice(id: number) {
+    return this.http.delete<Device>(`${this.URL_PATH}/${id}`)
+  }
 }

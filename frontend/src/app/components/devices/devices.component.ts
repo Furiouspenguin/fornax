@@ -12,6 +12,8 @@ import { DeviceService } from '../../services/device.service';
   styleUrl: './devices.component.scss',
 })
 export class DevicesComponent implements OnInit, OnDestroy {
+
+  
   devices: Device[] = [];
   interval ?: NodeJS.Timeout = undefined
 
@@ -19,7 +21,7 @@ export class DevicesComponent implements OnInit, OnDestroy {
   
   ngOnInit(): void {
     this.getDevicesData()
-    this.interval = setInterval(this.getDevicesData, 3000)
+    this.interval = setInterval(this.getDevicesData, 4000)
   }
 
   getDevicesData = () => {
@@ -28,6 +30,18 @@ export class DevicesComponent implements OnInit, OnDestroy {
         this.devices = data;
       },
     });
+  }
+
+  deleteDevice(id: number) {
+    console.log('attempting to delete device', id)
+    this.deviceService.removeDevice(id).subscribe({
+      next: (data) => {
+        console.log(`Device deleted. (id: ${data.id})`)
+        if (data.id !== id) console.warn('Deleted device\'s id doesn\'t match!');
+        const removedIndex = this.devices.findIndex((d) => d.id === id)
+        this.devices.splice(removedIndex, 1)
+      }
+    })
   }
 
   ngOnDestroy(): void {
