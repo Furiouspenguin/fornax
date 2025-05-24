@@ -1,5 +1,16 @@
 <main>
-  <a routerLink="/" routerLinkActive="active-link">Devices page</a>
+  <p-menubar [model]="menubar">
+    <ng-template  #item let-item>
+      @if (item.routerLink !== undefined) {
+        <ng-container>
+            <a [routerLink]="item.routerLink" class="p-menubar-item-link">
+                <span class="ml-2">{{ item.label }}</span>
+            </a>
+        </ng-container>
+      }
+        
+    </ng-template>
+</p-menubar>
 </main>
 
 

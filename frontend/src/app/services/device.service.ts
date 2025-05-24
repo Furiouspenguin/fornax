@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Device } from '../models/device.model';
+import { DeviceInput } from '../models/device-input.model';
 
 
 
@@ -17,7 +18,11 @@ export class DeviceService {
     return this.http.get<Device[]>(this.URL_PATH);
   }
 
+  addDevice(deviceInput: DeviceInput) {
+    return this.http.post<Device>(this.URL_PATH, deviceInput);
+  }
+
   removeDevice(id: number) {
-    return this.http.delete<Device>(`${this.URL_PATH}/${id}`)
+    return this.http.delete<Device>(`${this.URL_PATH}/${id}`);
   }
 }

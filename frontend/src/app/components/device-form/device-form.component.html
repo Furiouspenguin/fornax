@@ -1,0 +1,29 @@
+<form [formGroup]="deviceForm" (submit)="onSubmit(); $event.preventDefault()">
+    
+
+    <p-floatlabel variant="in">
+        <input pInputText id="name" formControlName="name" autocomplete="off" />
+        <label for="name">Dame</label>
+    </p-floatlabel>
+    
+
+    <p-floatlabel variant="in">
+        <input pInputText id="type" formControlName="type" autocomplete="off" />
+        <label for="type">Type</label>
+    </p-floatlabel>
+    
+
+    <p-floatlabel variant="in">
+        <input pInputText id="ip" formControlName="ip" autocomplete="off" />
+        <label for="ip">IP</label>
+    </p-floatlabel>
+    
+
+    <p-floatlabel variant="in">
+        <input pInputText id="location" formControlName="location" autocomplete="off" />
+        <label for="location">Location</label>
+    </p-floatlabel>
+
+
+    <p-button type="Submit" label="Submit"/>
+</form>
