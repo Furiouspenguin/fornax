@@ -53,14 +53,15 @@ export class DeviceService {
   }
 
   deleteDevice(id: number) {
-    console.log('attempting to delete device', id)
+    console.log('attempting to delete device', id);
     this.removeDevice(id).subscribe({
       next: (data) => {
-        console.log(`Device deleted. (id: ${data.id})`)
+        console.log(`Device deleted. (id: ${data.id})`);
         if (data.id !== id) console.warn('Deleted device\'s id doesn\'t match!');
-        const currentDevices = this._devices$.getValue()
-        const removedIndex = currentDevices.findIndex((d) => d.id === id)
-        this._devices$.next(currentDevices.splice(removedIndex, 1))
+        const currentDevices = this._devices$.getValue();
+        const removedIndex = currentDevices.findIndex((d) => d.id === id);
+        currentDevices.splice(removedIndex, 1);
+        this._devices$.next(currentDevices);
       }
     })
   }
@@ -126,6 +127,12 @@ export class DeviceService {
       const date = new Date(Date.now());
       const dateString = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
       const currentDeviceStatusData = this._deviceStatusData$.getValue();
+      if (currentDeviceStatusData.labels.length >= 10) {
+        currentDeviceStatusData.labels.shift();
+        currentDeviceStatusData.datasets[0].data.shift();
+        currentDeviceStatusData.datasets[1].data.shift();
+        currentDeviceStatusData.datasets[2].data.shift();
+      }
       currentDeviceStatusData.labels.push(dateString);
       currentDeviceStatusData.datasets[0].data.push(countActive);
       currentDeviceStatusData.datasets[1].data.push(countError);
