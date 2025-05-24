@@ -1,3 +1,12 @@
 .chart {
     margin-bottom: 2rem;
 }
+
+.update-div {
+    display: flex;
+    margin-right: 2rem;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: center;
+    justify-content: end;
+}

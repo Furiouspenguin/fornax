@@ -1,6 +1,10 @@
 <section>
     @if (deviceService.getDeviceStatusData$() | async; as statusData) {
         <div class="chart">
+            <div class="update-div">
+                <h3>Update devices:</h3>
+                <p-toggleswitch [(ngModel)]="isUpdatingChart" />
+            </div>
             <p-chart type="line" [data]="statusData" [options]="options" class="h-[30rem]" />
         </div>
     }
