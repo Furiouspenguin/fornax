@@ -1,8 +1,29 @@
-import devicesData from "../data/database";
+import devicesData, { updateDevicesData } from "../data/database";
+import { getRandomInt } from "../lib/utils";
 import { DeviceInput } from "../models/device-input.model";
-import { Device } from "../models/device.model";
+import { Device, DeviceStatus } from "../models/device.model";
 
 export function listAllDevices(): Device[] {
+    //randomize status
+    updateDevicesData(devicesData.map(d => {
+        let newStatus: DeviceStatus = 'active';
+        switch (getRandomInt(3)) {
+            case 0:
+                newStatus = 'active';
+                break;
+            case 1: 
+                newStatus = 'error';
+                break
+            case 2: 
+                newStatus = 'inactive';
+                break
+            default:
+                break;
+        }
+        d.status = newStatus;
+        return d;
+    }))
+    //return updated data
     return devicesData;
 }
 
