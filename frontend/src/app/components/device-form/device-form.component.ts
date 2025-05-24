@@ -33,9 +33,10 @@ export class DeviceFormComponent {
     if (this.deviceForm.valid) {
       const formData = this.deviceForm.value;
       console.log(formData);
-      this.deviceService.addDevice(formData as DeviceInput).subscribe({
+      this.deviceService.postDevice(formData as DeviceInput).subscribe({
         next: (data) => {
           console.log('Added new device: ', data);
+          this.deviceService.addDevice(data);
           this.deviceForm.reset();
         }
       })
