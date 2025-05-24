@@ -10,7 +10,7 @@ export function addNewDevice(deviceInput: DeviceInput): Device {
     //get a new ID
     const newId = devicesData.length > 0 ? (devicesData[devicesData.length -1].id + 1) : 0;
     //create new Device and add it to the database
-    const newDevice: Device = { id: newId, ...deviceInput }
+    const newDevice: Device = { id: newId, ...deviceInput, status: 'active' }
     const newLength = devicesData.push(newDevice);
     //return the new Device
     return devicesData[newLength - 1];

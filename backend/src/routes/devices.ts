@@ -13,12 +13,6 @@ devicesRouter.get('/', (req,res) => {
 //POST new device
 devicesRouter.post<DeviceInput>('/', 
     body('name').isString(), body('type').isString(), body('ip').isString(), body('location').isString(), 
-    body('status').custom(status => { 
-        if (!(status === 'active' || status === 'error' || status === 'inactive')) {
-            throw new Error('Bad Status!'); 
-        }
-        return status
-    }), 
     (req,res) => {
         const errors = validationResult(req);
         if (errors.isEmpty()) {
