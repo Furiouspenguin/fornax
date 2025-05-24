@@ -1,9 +1,11 @@
 import express from 'express';
 import devicesRouter from './routes/devices';
+import cors from 'cors'
 
 const app = express();
 const port = process.env.PORT || 3000;
 
+app.use(cors())
 app.use(express.json());
 app.use('/devices', devicesRouter)
 
