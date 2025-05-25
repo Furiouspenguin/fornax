@@ -1,5 +1,4 @@
 import { Types } from "mongoose";
-import devicesData from "../data/database";
 import { DeviceRepository } from "../data/device.schema";
 import { getRandomInt } from "../lib/utils";
 import { DeviceInput } from "../models/device-input.model";
