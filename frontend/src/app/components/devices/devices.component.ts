@@ -74,7 +74,7 @@ export class DevicesComponent implements OnInit, OnDestroy {
   }
 
 
-  deleteDevice(id: number) {
+  deleteDevice(id: string) {
     this.deviceService.deleteDevice(id);
   }
 

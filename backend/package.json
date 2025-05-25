@@ -21,7 +21,11 @@
     "typescript": "^5.8.3"
   },
   "dependencies": {
+    "@types/dotenv": "^6.1.1",
+    "@types/mongoose": "^5.11.96",
     "cors": "^2.8.5",
-    "express-validator": "^7.2.1"
+    "dotenv": "^16.5.0",
+    "express-validator": "^7.2.1",
+    "mongoose": "^8.15.0"
   }
 }

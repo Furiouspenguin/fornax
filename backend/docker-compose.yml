@@ -1,0 +1,16 @@
+services:
+  db:
+    #used version known to work and already tested on my home server (without requiring extra changes)
+    image: mongo:4.4.18
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+      - ./init.js:/docker-entrypoint-initdb.d/init.js
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=SecurePassword123
+      - MONGO_INITDB_DATABASE=devices_db
+
+volumes:
+  mongo-data:

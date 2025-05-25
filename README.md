@@ -6,6 +6,7 @@ A backend és frontend külön indítható a hozzájuk tartozó mappákból, íg
 Backend (terminal #1):
 ```bash
  $ cd backend
+ $ docker compose up -d #Windows-on: docker-compose up -d
  $ npm start
 ```
 

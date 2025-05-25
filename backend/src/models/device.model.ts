@@ -1,7 +1,9 @@
+import { Types } from "mongoose";
+
 export type DeviceStatus = 'active' | 'error' | 'inactive';
 
 export interface Device {
-    id: number;
+    _id: Types.ObjectId;
     name: string;
     type: string;
     ip: string;

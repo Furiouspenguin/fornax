@@ -34,7 +34,7 @@ export class DeviceService {
     return this.http.post<Device>(this.URL_PATH, deviceInput);
   }
 
-  removeDevice(id: number) {
+  removeDevice(id: string) {
     return this.http.delete<Device>(`${this.URL_PATH}/${id}`);
   }
 
@@ -52,14 +52,14 @@ export class DeviceService {
     });
   }
 
-  deleteDevice(id: number) {
+  deleteDevice(id: string) {
     console.log('attempting to delete device', id);
     this.removeDevice(id).subscribe({
       next: (data) => {
-        console.log(`Device deleted. (id: ${data.id})`);
-        if (data.id !== id) console.warn('Deleted device\'s id doesn\'t match!');
+        console.log(`Device deleted. (id: ${data._id})`);
+        if (data._id !== id) console.warn('Deleted device\'s id doesn\'t match!');
         const currentDevices = this._devices$.getValue();
-        const removedIndex = currentDevices.findIndex((d) => d.id === id);
+        const removedIndex = currentDevices.findIndex((d) => d._id === id);
         currentDevices.splice(removedIndex, 1);
         this._devices$.next(currentDevices);
       }
@@ -68,7 +68,7 @@ export class DeviceService {
 
   addDevice(device: Device) {
     const currentDevices = this._devices$.getValue();
-    const index = currentDevices.findIndex(d => d.id === device.id);
+    const index = currentDevices.findIndex(d => d._id === device._id);
     if (index < 1) {
       currentDevices.push(device);
       this._devices$.next(currentDevices);
