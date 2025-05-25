@@ -7,7 +7,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 // MongoDB connection
-const mongodbUrl: string = process.env.MONGO_URL || 'mongodb://admin:SecurePassword123@192.168.0.67:27017/devices_db?authSource=admin';
+const mongodbUrl: string = process.env.MONGO_URL || 'mongodb://admin:SecurePassword123@localhost:27017/devices_db?authSource=admin';
 mongoose.connect(mongodbUrl).then(() => {
   console.log('Connected to MongoDB database.');
 });
