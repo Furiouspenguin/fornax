@@ -1,29 +1,48 @@
-<form [formGroup]="deviceForm" (submit)="onSubmit(); $event.preventDefault()">
+<form class="device-form" [formGroup]="deviceForm" (submit)="onSubmit(); $event.preventDefault()">
     
-
-    <p-floatlabel variant="in">
-        <input pInputText id="name" formControlName="name" autocomplete="off" />
-        <label for="name">Dame</label>
-    </p-floatlabel>
+    <div>
+        <p-floatlabel variant="in">
+            <input pInputText id="name" formControlName="name" autocomplete="off" />
+            <label for="name">Name</label>
+        </p-floatlabel>
+        @if (checkFieldError('name')) {
+            <p class="error-message">This field is required!</p>
+        }
+    </div>
     
-
-    <p-floatlabel variant="in">
-        <input pInputText id="type" formControlName="type" autocomplete="off" />
-        <label for="type">Type</label>
-    </p-floatlabel>
+    <div>
+        <p-floatlabel variant="in">
+            <input pInputText id="type" formControlName="type" autocomplete="off" />
+            <label for="type">Type</label>
+        </p-floatlabel>
+        @if (checkFieldError('type')) {
+            <p class="error-message">This field is required!</p>
+        }
+    </div>
     
-
-    <p-floatlabel variant="in">
-        <input pInputText id="ip" formControlName="ip" autocomplete="off" />
-        <label for="ip">IP</label>
-    </p-floatlabel>
+    <div>
+        <p-floatlabel variant="in">
+            <input pInputText id="ip" formControlName="ip" autocomplete="off" />
+            <label for="ip">IP</label>
+        </p-floatlabel>
+        @if (checkFieldError('ip')) {
+            <p class="error-message">This field is required!</p>
+        }
+    </div>
     
-
-    <p-floatlabel variant="in">
-        <input pInputText id="location" formControlName="location" autocomplete="off" />
-        <label for="location">Location</label>
-    </p-floatlabel>
+    <div>
+        <p-floatlabel variant="in">
+            <input pInputText id="location" formControlName="location" autocomplete="off" />
+            <label for="location">Location</label>
+        </p-floatlabel>
+        @if (checkFieldError('location')) {
+            <p class="error-message">This field is required!</p>
+        }
+    </div>
 
 
     <p-button type="Submit" label="Submit"/>
+    @if (serverError) {
+        <p-message severity="error">{{serverError}}</p-message>
+    }
 </form>
