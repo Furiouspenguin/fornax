@@ -7,38 +7,45 @@ import { Types } from "mongoose";
 const devicesRouter = Router();
 
 //GET all devices
-devicesRouter.get('/', async (req,res) => {
-    res.json(await listAllDevices());
+devicesRouter.get('/', async (req, res, next) => {
+    try {
+        res.json(await listAllDevices());
+    } catch (error) {
+        next(error);
+    }
 })
 
 //POST new device
 devicesRouter.post<DeviceInput>('/', 
     body('name').isString(), body('type').isString(), body('ip').isString(), body('location').isString(), 
-    async (req,res) => {
-        const errors = validationResult(req);
-        if (errors.isEmpty()) {
-            res.json(await addNewDevice(req.body));
-        } else {
-            res.status(400).json({errors: errors.array()});
+    async (req,res, next) => {
+        try {
+            const errors = validationResult(req);
+            if (errors.isEmpty()) {
+                res.json(await addNewDevice(req.body));
+            } else {
+                res.status(400).json({errors: errors.array()});
+            }
+        } catch (error) {
+            next(error)
         }
     }
 )
 
 //DELETE device by id
-devicesRouter.delete('/:id', param('id').isString(), async (req,res) => {
+devicesRouter.delete('/:id', param('id').isString(), async (req, res, next) => {
     const errors = validationResult(req);
-    if (errors.isEmpty()) {
-        const id = String(req.params?.id)
-        try {
+    try {
+        if (errors.isEmpty()) {
+            const id = String(req.params?.id);
             res.json(await deleteDevice(new Types.ObjectId(id)))
-        } catch (error) {
-            console.error(error);
-            res.status(400).send('Bad ID!');
-        }
-    } else {
-        console.error(new Error('Invalid ID!'))
-        res.status(400).send('Invalid ID!');
-    } 
+            
+        } else {
+            throw new Error('Invalid ID!')
+        } 
+    } catch (error) {
+        next(error);
+    }
 })
 
 export default devicesRouter;

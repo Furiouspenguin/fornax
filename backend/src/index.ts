@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Request, Response, NextFunction, ErrorRequestHandler } from 'express';
 import devicesRouter from './routes/devices';
 import cors from 'cors'
 import mongoose from 'mongoose';
@@ -17,10 +17,12 @@ app.use(cors())
 app.use(express.json());
 app.use('/devices', devicesRouter)
 
-
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-});
+//basic error handling
+const errorHandler: ErrorRequestHandler = (err: Error, req: Request, res: Response, next: NextFunction) => {
+  console.error(err.message)
+  res.status(400).send(err.message)
+}
+app.use(errorHandler);
 
 
 app.listen(port, () => {
